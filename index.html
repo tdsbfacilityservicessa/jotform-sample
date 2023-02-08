@@ -1,32 +1,99 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
-    </head>
-    <body>
-        <div id="main">
-            <h3>This is my first widget.</h3>
-            <span id="labelText"></span>
-            <input type="text" id="userInput">
-        </div>
-        <script type="text/javascript">
-            //always subscribe to ready event and implement widget related code
-            //inside callback function , it is the best practice while developing widgets
-            JFCustomWidget.subscribe("ready", function(){
-                var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
-                document.getElementById('labelText').innerHTML = label;
-                //subscribe to form submit event
-                JFCustomWidget.subscribe("submit", function(){
-                    var msg = {
-                        //you should valid attribute to data for JotForm
-                        //to be able to use youw widget as required
-                        valid: true,
-                        value: document.getElementById('userInput').value
-                    }
-                    // send value to JotForm
-                    JFCustomWidget.sendSubmit(msg);
+
+<head>
+    <style>
+        html {
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+
+    <script src="https://js.jotform.com/JotFormCustomWidget.min.js"></script>
+</head>
+
+<body>
+    <select id="tdsbSchools" class="selectpicker" data-show-subtext="false" data-live-search="true">
+      </select>
+
+    <script rel="display: none;" type="module">
+        var listOfSchools = [];
+
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js'
+
+        import { getDatabase, ref, get, onValue } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js'
+
+        // TODO: Replace the following with your app's Firebase project configuration
+        const firebaseConfig = {
+            databaseUrl: 'https://school-list-d2861-default-rtdb.firebaseio.com/',
+            projectId: 'school-list-d2861'
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Initialize Realtime Database and get a reference to the service
+        const db = getDatabase(app);
+
+        const dbRef = ref(db, '1cgb69YWxGnY5YphO1rTPYMdjFSmzkeNKPrBt2XiMYNA/List of Schools');
+
+        function listenToFirebase(dbRef) {
+            return new Promise((res, rej) => {
+                onValue(dbRef, (snapshot) => {
+                    let origData = convertFirebaseObjectToObject(snapshot);
+
+                    res(origData.map(school => school.Facility))
                 });
+            })
+
+        }
+
+        function convertFirebaseObjectToObject(data) {
+            let object = [];
+            data.forEach(datum => {
+                object.push(JSON.parse(JSON.stringify(datum)));
             });
-        </script>
-    </body>
+
+            return object;
+        }
+
+        listenToFirebase(dbRef).then(schools => {
+            console.log(schools)
+
+            $('#tdsbSchools').empty();
+            $('#tdsbSchools').append('<option value="" selected>Select a school</option>');
+  
+            schools.forEach(school => {
+                $('#tdsbSchools').append('<option value=' + school + '>' + school + '</option>');
+            })
+
+            $('#tdsbSchools').selectpicker('refresh');
+
+        });
+
+        //always subscribe to ready event and implement widget related code
+        //inside callback function , it is the best practice while developing widgets
+        JFCustomWidget.subscribe("ready", function () {
+            //subscribe to form submit event
+            JFCustomWidget.subscribe("submit", function () {
+                var msg = {
+                    //you should valid attribute to data for JotForm
+                    //to be able to use youw widget as required
+                    valid: true,
+                    value: document.getElementById('selectedSchool').value
+                }
+                // send value to JotForm
+                JFCustomWidget.sendSubmit(msg);
+            });
+        });
+
+    </script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+</body>
+
 </html>
