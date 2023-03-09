@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true" onclick="selectClick()">
+    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true" onclick="selectClick">
     </select>
 
     <script rel="display: none;" type="module">
@@ -77,10 +77,6 @@
         });
 
         window.onload = (event) => {
-            JFCustomWidget.requestFrameResize({
-                width: 300,
-                height: 100
-            });
             console.log("page is fully loaded");
         };
 
