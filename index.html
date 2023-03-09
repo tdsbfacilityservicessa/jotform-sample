@@ -80,9 +80,9 @@
             console.log("page is fully loaded");
         };
 
-        $('.selectpicker').on('click', function(){
-                console.log("Clieck")
-        });
+        window.unload = (event) => {
+            console.log("page is unloaded");
+        };
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
