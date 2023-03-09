@@ -76,15 +76,18 @@
 
         });
 
-        
-
-        //always subscribe to ready event and implement widget related code
-        //inside callback function , it is the best practice while developing widgets
-        JFCustomWidget.subscribe("ready", function () {
+        window.onload = (event) => {
             JFCustomWidget.requestFrameResize({
                 width: 500,
                 height: 500
             });
+            console.log("page is fully loaded");
+        };
+
+        //always subscribe to ready event and implement widget related code
+        //inside callback function , it is the best practice while developing widgets
+        JFCustomWidget.subscribe("ready", function () {
+            
             //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function () {
                 var msg = {
