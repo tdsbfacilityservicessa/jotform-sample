@@ -20,6 +20,11 @@
     </select>
 
     <script rel="display: none;" type="module">
+        JFCustomWidget.requestFrameResize({
+            width: 500,
+            height: 500
+        });
+
         var listOfSchools = [];
 
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js'
@@ -74,18 +79,11 @@
 
         });
 
-        JFCustomWidget.requestFrameResize({
-            width: 500,
-            height: 500
-        });
+        
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
         JFCustomWidget.subscribe("ready", function () {
-            JFCustomWidget.requestFrameResize({
-                width: 500,
-                height: 500
-            });
             //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function () {
                 var msg = {
