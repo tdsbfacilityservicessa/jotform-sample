@@ -80,11 +80,9 @@
             console.log("page is fully loaded");
         };
 
-        const divs = document.querySelectorAll('.bootstrap-select');
-
-        divs.forEach(el => el.addEventListener('click', event => {
-            console.log(event.target.getAttribute("data-el"));
-        }));
+        $('select').on('click', function(e){
+            console.log('clicked')
+        });
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
