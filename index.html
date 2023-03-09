@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true" onclick="selectClick()">
+    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true">
     </select>
 
     <script rel="display: none;" type="module">
@@ -80,13 +80,11 @@
             console.log("page is fully loaded");
         };
 
-        function selectClick() {
-            console.log("clicked")
-            JFCustomWidget.requestFrameResize({
-                width: 500,
-                height: 500
-            });
-        }
+        const divs = document.querySelectorAll('.bootstrap-select');
+
+        divs.forEach(el => el.addEventListener('click', event => {
+            console.log(event.target.getAttribute("data-el"));
+        }));
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
