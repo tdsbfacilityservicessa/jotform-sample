@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true">
+    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true" onclick="selectClick()">
     </select>
 
     <script rel="display: none;" type="module">
@@ -78,16 +78,22 @@
 
         window.onload = (event) => {
             JFCustomWidget.requestFrameResize({
-                width: 500,
-                height: 500
+                width: 300,
+                height: 100
             });
             console.log("page is fully loaded");
         };
 
+        function selectClick() {
+            JFCustomWidget.requestFrameResize({
+                width: 500,
+                height: 500
+            });
+        }
+
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
         JFCustomWidget.subscribe("ready", function () {
-            
             //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function () {
                 var msg = {
