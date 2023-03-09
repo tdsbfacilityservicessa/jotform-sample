@@ -74,6 +74,11 @@
 
         });
 
+        JFCustomWidget.requestFrameResize({
+            width: '300',
+            height: '500'
+        });
+
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
         JFCustomWidget.subscribe("ready", function () {
@@ -83,7 +88,7 @@
                     //you should valid attribute to data for JotForm
                     //to be able to use youw widget as required
                     valid: true,
-                    value: document.getElementById('selectedSchool').value
+                    value: document.getElementById('selectedSchool')
                 }
                 // send value to JotForm
                 JFCustomWidget.sendSubmit(msg);
