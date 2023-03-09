@@ -80,8 +80,10 @@
             console.log("page is fully loaded");
         };
 
-        $('select').on('click', function(e){
-            console.log('clicked')
+        $(function(){
+            $('div.bootstrap-select').on('click', function(){
+                console.log("Clieck")
+            });
         });
 
         //always subscribe to ready event and implement widget related code
