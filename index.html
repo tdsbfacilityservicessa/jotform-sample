@@ -82,6 +82,7 @@
                 console.log("Clicked")
 
                 if (isSelectToggled) {
+                    console.log("Toggled false")
                     isSelectToggled = false;
 
                     JFCustomWidget.requestFrameResize({
@@ -91,14 +92,13 @@
                 }
                 else {
                     isSelectToggled = true;
+                    console.log("Toggled true")
 
                     JFCustomWidget.requestFrameResize({
                         width: 400,
                         height: 400
                     });
                 }
-
-                
             })
 
             // selectpicker.addEventListener("onchange", function (event) {
