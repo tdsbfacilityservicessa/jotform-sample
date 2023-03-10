@@ -74,18 +74,27 @@
 
             $('#tdsbSchools').selectpicker('refresh');
 
+            const selectpicker = document.getElementsByClassName("selectpicker")[0]
+            const dropd = document.getElementsByClassName("selectpicker")[0]
+            console.log(selectpicker)
+
+            selectpicker.addEventListener("click", function (event) {
+                console.log("Clicked")
+                JFCustomWidget.requestFrameResize({
+                    width: 300,
+                    height: 500
+                });
+            })
+
+            // selectpicker.addEventListener("onchange", function (event) {
+            //     console.log("Changed")
+            // })
+
         });
 
         window.onload = (event) => {
             console.log("page is fully loaded");
         };
-
-        const selectpicker = document.getElementsByClassName("selectpicker")[0]
-        console.log(selectpicker)
-
-        selectpicker.addEventListener("click", function(event) {
-            console.log("Clicked")
-        })
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
