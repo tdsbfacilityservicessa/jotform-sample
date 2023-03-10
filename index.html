@@ -18,12 +18,10 @@
 </head>
 
 <body>
-    <select class="selectpicker form-control" data-live-search="true">
+    <select id="tdsbSchools" class="selectpicker form-control" data-live-search="true">
     </select>
 
     <script rel="display: none;" type="module">
-
-
         var listOfSchools = [];
 
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js'
@@ -72,6 +70,8 @@
                     width: 400,
                     height: 100
                 });
+
+                console.log($('.selectpicker').val())
             });
 
             $('.selectpicker').on('show.bs.select', function (e) {
@@ -104,7 +104,7 @@
             $('.selectpicker').append('<option value="" selected>Select a school</option>');
 
             schools.forEach(school => {
-                $('.selectpicker').append('<option value=' + school + '>' + school + '</option>');
+                $('.selectpicker').append('<option value="' + school + '">' + school + '</option>');
             })
 
             $('.selectpicker').selectpicker('refresh');
@@ -119,7 +119,7 @@
                     //you should valid attribute to data for JotForm
                     //to be able to use youw widget as required
                     valid: true,
-                    value: document.getElementById('selectedSchool')
+                    value: $('.selectpicker').val()
                 }
                 // send value to JotForm
                 JFCustomWidget.sendSubmit(msg);
