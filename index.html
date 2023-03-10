@@ -9,18 +9,20 @@
         }
     </style>
 
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+    <!-- Include Bootstrap and Selectpicker CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
 
     <script src="https://js.jotform.com/JotFormCustomWidget.min.js"></script>
 </head>
 
 <body>
-    <select id="tdsbSchools" class="form-control" data-show-subtext="false" data-live-search="true">
+    <select class="selectpicker" data-live-search="true">
     </select>
 
     <script rel="display: none;" type="module">
-        let isSelectToggled = false;
+
 
         var listOfSchools = [];
 
@@ -62,54 +64,51 @@
             return object;
         }
 
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker();
+
+            $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+                JFCustomWidget.requestFrameResize({
+                    width: 400,
+                    height: 100
+                });
+            });
+
+            $('.selectpicker').on('show.bs.select', function (e) {
+                JFCustomWidget.requestFrameResize({
+                    width: 400,
+                    height: 400
+                });
+            });
+
+            $('.selectpicker').on('hide.bs.select', function (e) {
+                JFCustomWidget.requestFrameResize({
+                    width: 400,
+                    height: 100
+                });
+            });
+
+            $('.selectpicker').on('rendered.bs.select', function (e) {
+                console.log('Selectpicker rendered');
+            });
+
+            $('.selectpicker').on('refreshed.bs.select', function (e) {
+                console.log('Selectpicker refreshed');
+            });
+        });
+
         listenToFirebase(dbRef).then(schools => {
             console.log(schools)
 
-            $('#tdsbSchools').empty();
-            $('#tdsbSchools').append('<option value="" selected>Select a school</option>');
-  
+            $('.selectpicker').empty();
+            $('.selectpicker').append('<option value="" selected>Select a school</option>');
+
             schools.forEach(school => {
-                $('#tdsbSchools').append('<option value=' + school + '>' + school + '</option>');
+                $('.selectpicker').append('<option value=' + school + '>' + school + '</option>');
             })
 
-            $('#tdsbSchools').selectpicker('refresh');
-
-            const selectpicker = document.getElementsByClassName("selectpicker")[0]
-            const dropd = document.getElementsByClassName("selectpicker")[0]
-            console.log(selectpicker)
-
-            selectpicker.addEventListener("click", function (event) {
-                console.log("Clicked")
-
-                if (isSelectToggled) {
-                    console.log("Toggled false")
-                    isSelectToggled = false;
-
-                    JFCustomWidget.requestFrameResize({
-                        width: 400,
-                        height: 100
-                    });
-                }
-                else {
-                    isSelectToggled = true;
-                    console.log("Toggled true")
-
-                    JFCustomWidget.requestFrameResize({
-                        width: 400,
-                        height: 400
-                    });
-                }
-            })
-
-            // selectpicker.addEventListener("onchange", function (event) {
-            //     console.log("Changed")
-            // })
-
+            $('.selectpicker').selectpicker('refresh');
         });
-
-        window.onload = (event) => {
-            console.log("page is fully loaded");
-        };
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
@@ -128,9 +127,10 @@
         });
 
     </script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <!-- Include Bootstrap and Selectpicker JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 </body>
 
 </html>
