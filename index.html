@@ -20,7 +20,7 @@
     </select>
 
     <script rel="display: none;" type="module">
-        
+        let isSelectToggled = false;
 
         var listOfSchools = [];
 
@@ -80,10 +80,25 @@
 
             selectpicker.addEventListener("click", function (event) {
                 console.log("Clicked")
-                JFCustomWidget.requestFrameResize({
-                    width: 300,
-                    height: 500
-                });
+
+                if (isSelectToggled) {
+                    isSelectToggled = false;
+
+                    JFCustomWidget.requestFrameResize({
+                        width: 400,
+                        height: 100
+                    });
+                }
+                else {
+                    isSelectToggled = true;
+
+                    JFCustomWidget.requestFrameResize({
+                        width: 400,
+                        height: 400
+                    });
+                }
+
+                
             })
 
             // selectpicker.addEventListener("onchange", function (event) {
