@@ -80,9 +80,12 @@
             console.log("page is fully loaded");
         };
 
-        window.unload = (event) => {
-            console.log("page is unloaded");
-        };
+        const selectpicker = document.getElementsByClassName("selectpicker")[0]
+        console.log(selectpicker)
+
+        selectpicker.addEventListener("click", function(event) {
+            console.log("Clicked")
+        })
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
