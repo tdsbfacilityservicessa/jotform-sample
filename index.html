@@ -63,11 +63,13 @@
         }
 
         $(document).ready(function () {
+            const widgetWidth = 400;
+
             $('.selectpicker').selectpicker();
 
             $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
                 JFCustomWidget.requestFrameResize({
-                    width: 700,
+                    width: widgetWidth,
                     height: 100
                 });
 
@@ -76,14 +78,14 @@
 
             $('.selectpicker').on('show.bs.select', function (e) {
                 JFCustomWidget.requestFrameResize({
-                    width: 700,
+                    width: widgetWidth,
                     height: 400
                 });
             });
 
             $('.selectpicker').on('hide.bs.select', function (e) {
                 JFCustomWidget.requestFrameResize({
-                    width: 700,
+                    width: widgetWidth,
                     height: 100
                 });
             });
