@@ -72,6 +72,18 @@
             JFCustomWidget.subscribe("ready", function (data) {
                 widgetWidth = data.width - 100;
 
+                listenToFirebase(dbRef).then(schools => {
+                    console.log(widgetWidth)
+                    $('.selectpicker').empty();
+                    $('.selectpicker').append('<option style="width:' + widgetWidth + 'px;" value="" selected>Select a school</option>');
+
+                    schools.forEach(school => {
+                        $('.selectpicker').append('<option style="width:' + widgetWidth + 'px;" value="' + school + '">' + school + '</option>');
+                    })
+
+                    $('.selectpicker').selectpicker('refresh');
+                });
+
                 //subscribe to form submit event
                 JFCustomWidget.subscribe("submit", function () {
                     var msg = {
@@ -111,18 +123,6 @@
 
             $('.selectpicker').on('refreshed.bs.select', function (e) {
                 console.log('Selectpicker refreshed');
-            });
-
-            listenToFirebase(dbRef).then(schools => {
-                console.log(widgetWidth)
-                $('.selectpicker').empty();
-                $('.selectpicker').append('<option style="width:' + widgetWidth +  'px;" value="" selected>Select a school</option>');
-
-                schools.forEach(school => {
-                    $('.selectpicker').append('<option style="width:' + widgetWidth +  'px;" value="' + school + '">' + school + '</option>');
-                })
-
-                $('.selectpicker').selectpicker('refresh');
             });
         });
 
