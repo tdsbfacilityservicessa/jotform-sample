@@ -22,6 +22,7 @@
     </select>
 
     <script rel="display: none;" type="module">
+        console.log(JFCustomWidget.getWidgetSettings())
         var listOfSchools = [];
 
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js'
@@ -101,10 +102,10 @@
             console.log(schools)
 
             $('.selectpicker').empty();
-            $('.selectpicker').append('<option value="" selected>Select a school</option>');
+            $('.selectpicker').append('<option style="width:400px;" value="" selected>Select a school</option>');
 
             schools.forEach(school => {
-                $('.selectpicker').append('<option value="' + school + '">' + school + '</option>');
+                $('.selectpicker').append('<option style="width:400px;" value="' + school + '">' + school + '</option>');
             })
 
             $('.selectpicker').selectpicker('refresh');
