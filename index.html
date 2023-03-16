@@ -26,7 +26,6 @@
     </select>
 
     <script rel="display: none;" type="module">
-        console.log(JFCustomWidget.getWidgetSettings())
         var listOfSchools = [];
 
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js'
@@ -114,7 +113,12 @@
 
         //always subscribe to ready event and implement widget related code
         //inside callback function , it is the best practice while developing widgets
-        JFCustomWidget.subscribe("ready", function () {
+        JFCustomWidget.subscribe("ready", function (data) {
+            var widgetEl = document.getElementById(data.widgetId);
+
+            var width = widgetEl.getWidth();
+
+            console.log('Widget width: ' + width)
             //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function () {
                 var msg = {
