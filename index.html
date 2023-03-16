@@ -69,7 +69,7 @@
             //always subscribe to ready event and implement widget related code
             //inside callback function , it is the best practice while developing widgets
             JFCustomWidget.subscribe("ready", function () {
-                console.log(JFCustomWidget.getWidgetId())
+                console.log(JFCustomWidget.getWidgetId().width)
                 //subscribe to form submit event
                 JFCustomWidget.subscribe("submit", function () {
                     var msg = {
