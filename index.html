@@ -114,6 +114,7 @@
             });
 
             listenToFirebase(dbRef).then(schools => {
+                console.log(widgetWidth)
                 $('.selectpicker').empty();
                 $('.selectpicker').append('<option style="width:' + widgetWidth +  'px;" value="" selected>Select a school</option>');
 
