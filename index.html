@@ -70,7 +70,7 @@
             //inside callback function , it is the best practice while developing widgets
             JFCustomWidget.subscribe("ready", function (data) {
                 var widgetEl = document.getElementById(data.widgetId);
-
+                console.log(data)
                 var width = widgetEl.getWidth();
 
                 console.log('Widget width: ' + width)
