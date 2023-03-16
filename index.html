@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <select id="tdsbSchools" class="selectpicker" data-width="auto" data-live-search="true">
+    <select id="tdsbSchools" class="selectpicker" data-width="400px" data-live-search="true">
     </select>
 
     <script rel="display: none;" type="module">
@@ -63,7 +63,7 @@
         }
 
         $(document).ready(function () {
-            const widgetWidth = $(window).width() - 30;
+            const widgetWidth = $(window).width();
 
             $('.selectpicker').selectpicker();
 
@@ -102,10 +102,10 @@
             console.log(schools)
 
             $('.selectpicker').empty();
-            $('.selectpicker').append('<option style="width:100%;" value="" selected>Select a school</option>');
+            $('.selectpicker').append('<option style="width:400px;" value="" selected>Select a school</option>');
 
             schools.forEach(school => {
-                $('.selectpicker').append('<option style="width:100%;" value="' + school + '">' + school + '</option>');
+                $('.selectpicker').append('<option style="width:400px;" value="' + school + '">' + school + '</option>');
             })
 
             $('.selectpicker').selectpicker('refresh');
