@@ -68,8 +68,8 @@
         $(document).ready(function () {
             //always subscribe to ready event and implement widget related code
             //inside callback function , it is the best practice while developing widgets
-            JFCustomWidget.subscribe("ready", function (data) {
-                console.log(data)
+            JFCustomWidget.subscribe("ready", function () {
+                console.log(JFCustomWidget.getWidgetId())
                 //subscribe to form submit event
                 JFCustomWidget.subscribe("submit", function () {
                     var msg = {
