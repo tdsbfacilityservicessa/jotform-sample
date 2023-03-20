@@ -70,7 +70,7 @@
             //always subscribe to ready event and implement widget related code
             //inside callback function , it is the best practice while developing widgets
             JFCustomWidget.subscribe("ready", function (data) {
-                widgetWidth = data.width - 10;
+                widgetWidth = data.width - 30;
 
                 listenToFirebase(dbRef).then(schools => {
                     console.log(widgetWidth)
